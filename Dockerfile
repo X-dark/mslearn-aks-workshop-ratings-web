@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:14-alpine3.15
 
 WORKDIR /usr/src/app
 
@@ -7,7 +7,7 @@ RUN cp -v /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem /etc/ssl/certs/ca-ce
 ENV NODE_EXTRA_CA_CERTS /etc/ssl/certs/ca-certificates.crt
 
 # Install build dependencies via apk
-RUN apk update && apk add python3 g++ make && rm -rf /var/cache/apk/*
+RUN apk update && apk add --no-cache python2 g++ make 
 
 # Install node dependencies - done in a separate step so Docker can cache it
 COPY package*.json ./
